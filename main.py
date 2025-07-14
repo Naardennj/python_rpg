@@ -18,7 +18,8 @@ def create_monster(level):
         "name" : f"Monster #{level}",
         "level": level,
         "damage": 5 * level,
-        "health": 100 * level,
+        "hp": 100 * level,
+        "hp_max": 100 * level,
         "exp": 7 * level,
     }
 
@@ -31,17 +32,25 @@ def create_monsters (n_npcs):
 
 def show_npcs():
     for npc in npcs_list:
-        print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['health']} // Exp: {npc['exp']}")
+        print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['hp']} // Exp: {npc['exp']}")
+
+def start_battle(npc):
+    atack_npc(npc)
+    atack_player(npc)
+    show_info_battle(npc)
 
 def atack_npc(npc):
-    npc["health"] -= player["damage"]
+    npc["hp"] -= player["damage"]
+
+def atack_player(npc):
+    player["hp"] -= npc["damage"]
+
+def show_info_battle(npc):
+    print(f"Player:{player['hp']} // {player['hp_max']}")
+    print(f"NPC: {npc['name']}: {npc['hp']} // {npc['hp_max']}")
 
 create_monsters(5)
-show_npcs()
+# show_npcs()
 
 npc_select = npcs_list[0]
-
-print("NPC selecionado", npc_select)
-atack_npc(npc_select)
-
-print("NPC atacado", npc_select)
+start_battle(npc_select)
