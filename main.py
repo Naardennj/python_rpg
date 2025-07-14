@@ -32,7 +32,13 @@ def create_monsters (n_npcs):
 
 def show_npcs():
     for npc in npcs_list:
-        print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['hp']} // Exp: {npc['exp']}")
+        show_npc(npc)
+    
+def show_npc(npc):
+    print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['hp']} // Exp: {npc['exp']}")
+
+def show_player():
+    print(f"Name: {player['name']} // Level: {player['level']} // Damage: {player['damage']} // Health: {player['hp']} / {player['hp_max']} // Exp: {player['exp']} / {player['exp_max']}")
 
 def start_battle(npc):
     while player["hp"] > 0 and npc["hp"] > 0:
@@ -41,9 +47,12 @@ def start_battle(npc):
         show_info_battle(npc)
     
     if player["hp"] > 0:
-        print(f"O {player['name']} venceu e ganhou {npc['exp']}!")
+        print(f"O {player['name']} venceu e ganhou {npc['exp']} de EXP!")
+        player["exp"] += npc["exp"]
+        show_player()
     else:
         print(f"O {player['name']} foi derrotado pelo {npc['name']}!")
+        show_npc(npc)
 
 def atack_npc(npc):
     npc["hp"] -= player["damage"]
