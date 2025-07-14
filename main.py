@@ -40,6 +40,12 @@ def show_npc(npc):
 def show_player():
     print(f"Name: {player['name']} // Level: {player['level']} // Damage: {player['damage']} // Health: {player['hp']} / {player['hp_max']} // Exp: {player['exp']} / {player['exp_max']}")
 
+def reset_player():
+    player["hp"] = player["hp_max"]
+
+def reset_npc(npc):
+    npc["hp"] = npc["hp_max"]
+
 def start_battle(npc):
     while player["hp"] > 0 and npc["hp"] > 0:
         atack_npc(npc)
@@ -53,6 +59,9 @@ def start_battle(npc):
     else:
         print(f"O {player['name']} foi derrotado pelo {npc['name']}!")
         show_npc(npc)
+    
+    reset_player()
+    reset_npc(npc)
 
 def atack_npc(npc):
     npc["hp"] -= player["damage"]
