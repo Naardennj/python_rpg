@@ -1,6 +1,6 @@
 from random import randint
 
-npcs_list = [] 
+npcs_list = []
 
 player = {
     "name": "Gabriel",
@@ -10,11 +10,9 @@ player = {
     "hp": 100,
     "hp_max": 100,
     "damage": 25,
-
 }
 
-def create_monster():
-    level = randint(0, 50)
+def create_monster(level):
     
     new_npc = {
         "name" : f"Monster #{level}",
@@ -28,12 +26,12 @@ def create_monster():
 
 def create_monsters (n_npcs):
     for x in range(n_npcs):
-        new_npc =  create_monster()
-        npcs_list.append(new_npc)
+        npc = create_monster(x + 1)
+        npcs_list.append(npc)
 
 def show_npcs():
     for npc in npcs_list:
-        print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['health']}")
+        print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['health']} // Exp: {npc['exp']}")
 
 def atack_npc(npc):
     npc["health"] -= player["damage"]
