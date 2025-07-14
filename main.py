@@ -35,5 +35,15 @@ def show_npcs():
     for npc in npcs_list:
         print(f"Name: {npc['name']} // Level: {npc['level']} // Damage: {npc['damage']} // Health: {npc['health']}")
 
+def atack_npc(npc):
+    npc["health"] -= player["damage"]
+
 create_monsters(5)
 show_npcs()
+
+npc_select = npcs_list[0]
+
+print("NPC selecionado", npc_select)
+atack_npc(npc_select)
+
+print("NPC atacado", npc_select)
