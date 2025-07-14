@@ -6,7 +6,7 @@ player = {
     "name": "Gabriel",
     "level": 1,
     "exp": 0,
-    "exp_max": 50,
+    "exp_max": 30,
     "hp": 100,
     "hp_max": 100,
     "damage": 25,
@@ -46,10 +46,17 @@ def reset_player():
 def reset_npc(npc):
     npc["hp"] = npc["hp_max"]
 
+def level_up():
+    if player["exp"] >= player["exp_max"]:
+        player["level"] += 1
+        player["exp"] = 0
+        player["exp_max"] = player ["exp_max"] * 2
+        player["hp_max"] += 20
+
 def start_battle(npc):
     while player["hp"] > 0 and npc["hp"] > 0:
         atack_npc(npc)
-        atack_player(npc)
+        atack_player(npc)   
         show_info_battle(npc)
     
     if player["hp"] > 0:
@@ -60,6 +67,7 @@ def start_battle(npc):
         print(f"O {player['name']} foi derrotado pelo {npc['name']}!")
         show_npc(npc)
     
+    level_up()
     reset_player()
     reset_npc(npc)
 
